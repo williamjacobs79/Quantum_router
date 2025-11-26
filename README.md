@@ -1,65 +1,74 @@
-**Project Overview: Quantum Optimization of Vehicle Routing Problem (VRP)**
+# QLO_Demo Setup Guide
 
-**Introduction**
+## References
 
-The Western Quantum Computing Club (WQC) is developing an innovative quantum algorithm to optimize the Vehicle Routing Problem (VRP), a significant challenge in logistics and supply chain management. Leveraging quantum computing's unique capabilities, our solution aims to identify the most efficient routes for distributors, minimizing fuel costs and reducing delivery times despite fluctuating daily conditions.
+[Django & React (TechWithTim)](https://www.youtube.com/watch?v=c-QsfbznSXI)  
+[React Redux Authentication (DaveGray)](https://www.youtube.com/watch?v=-JJFQ9bkUbo)
 
-**Problem Statement**
+## Python/Django/Server Setup
 
-Traditional VRP solutions, while effective, often struggle to adapt in real-time to changes such as traffic patterns, delivery deadlines, and fuel costs. These challenges frequently result in inefficiencies that drive up operational costs and reduce customer satisfaction. By harnessing quantum computing, we aim to significantly enhance route optimization, allowing companies to dynamically adapt to real-world changes.
+### Create virtual environment - In the root dir run:
 
-**Project Objectives**
+`python -m venv env`
 
-Quantum Algorithm Development
-Develop a quantum algorithm that surpasses classical methods in both computational efficiency and adaptability, providing near-instantaneous solutions to complex routing challenges.
+### Activate the env:
 
-Full-Stack Application
-Create an intuitive, user-friendly application enabling distributors to input routing parameters and receive optimized routes based on real-time data.
+Windows: `env/Scripts/activate`  
+Mac: `env/bin/activate`
 
-Cost and Time Optimization
-Demonstrate the algorithm’s capability to reduce fuel costs and improve delivery times, delivering measurable savings and operational improvements.
+### CD to server dir:
 
-**Solution Approach**
+`cd server`
 
-Quantum Computing
-Utilizing combinatorial optimization algorithms, our quantum approach aims to provide a computational advantage over traditional methods.
+### Install Python dependencies:
 
-Real-Time Adaptability
-The application will combine historical and live data to adapt routing recommendations dynamically, accounting for variables such as traffic, weather, and delivery windows.
+`pip install -r requirements.txt`
 
-Scalability
-Designed for scalability across various distribution networks, from local deliveries to complex, multi-regional operations.
+### Run Django migrate:
 
-**Project Deliverables**
+`py manage.py migrate`
 
-Quantum Algorithm
-A thoroughly tested and validated algorithm optimized for VRP, ready for deployment.
+### Create a .env file
 
-Full-Stack Application
-A web-based application featuring:
-A user-friendly interface for straightforward data input.
-A backend that processes inputs using our quantum algorithm.
-Visualization tools for mapping routes and displaying key metrics.
+_Replace yourTokenHere with your tokens, Google token must have Maps JavaScript API, Routes API & Geocoding API enabled_  
+Windows (Powershell):  
+`Set-Content -Path .env -Value "DWAVELEAP_TOKEN=yourTokenHere"`  
+`Add-Content -Path .env -Value "GOOGLEMAPS_API_KEY=yourTokenHere"`  
+Mac:  
+`echo "DWAVELEAP_TOKEN=yourTokenHere" > .env && echo "GOOGLEMAPS_API_KEY=yourTokenHere" >> .env`
 
-Performance Metrics
-A detailed report showcasing fuel cost savings, time reductions, and improvements in computational efficiency.
+## JS/React/Client Setup
 
-**Stakeholder Benefits**
+### CD to client dir:
 
-Operational Savings
-Reduction in fuel costs and improved efficiency, positively impacting logistics companies’ bottom lines.
+`cd ../client`
 
-Scalable Solution
-Adaptable across various scales, from small businesses to large enterprises, maximizing market potential.
+### Install JS dependencies:
 
-Competitive Edge
-Quantum-based optimization provides a technological advantage over competitors relying on classical methods.
+`npm install`
 
-**Next Steps**
+### Create a .env file
 
-We are currently developing the quantum algorithm and expect to have a working prototype by December 2024. We seek stakeholder engagement and support as we advance the application’s development and prepare for deployment and testing phases.
+_Replace yourTokenHere with your token, Google token must have Maps JavaScript API, Routes API & Geocoding API enabled_  
+Windows (Powershell): `Set-Content -Path .env -Value "VITE_GOOGLEMAPS_API_KEY=yourTokenHere"`  
+Mac: `echo "VITE_GOOGLEMAPS_API_KEY=yourTokenHere" > .env`
 
-For more information, please contact:
+## Running Demo
 
-Nicolas Folz - NFolz.hba2026@ivey.ca
-William Jacobs - wjacobsdavidovitch.hba2026@ivey.ca
+### Start server (from server dir)
+
+_Make sure that env is activated_  
+`py manage.py runserver`
+
+### Start client (from client dir)
+
+`npm run dev`
+
+### Within the application
+
+1. Create an account
+2. Login
+3. Go to create routes
+4. Add new deliveries (remove test deliveries if you want)
+5. Select number of vehicles, select depot (currently disabled), click optimize
+6. Select a result to view details
